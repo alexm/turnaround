@@ -35,15 +35,13 @@ sub query_parameters {
     };
 }
 
-sub _parse_request_body {
+sub body_parameters {
     my $self = shift;
 
-    my $retval = $self->SUPER::_parse_request_body(@_);
+    $self->SUPER::body_parameters(@_);
 
     $self->env->{'plack.request.body'} =
       $self->_decode_parameters($self->env->{'plack.request.body'});
-
-    return $retval;
 }
 
 sub _decode_parameters {
